@@ -28,6 +28,9 @@ Found {num_words} total words\n
         
 if __name__ == "__main__":
     args = sys.argv
-    if args[1]:
+    if len(args) > 1:
         arg = args[1]
+    else:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
     main(arg)
