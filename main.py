@@ -9,23 +9,26 @@ def get_book_txt(filepath: str) -> str:
     return file_content
 
 
-def main(arg):
-    if not arg:
-        return
-    book_content = get_book_txt(filepath=arg)
+def main(filepath):
+    try:
+        book_content = get_book_txt(filepath)
+    except FileNotFoundError:
+        print("File does not exist, please check filepath to book")
+        sys.exit(1)
+    
     num_words = count_words(book_content)
     char_count = count_chars(book_content)
     storted_chars = sort_count_chars(char_count)
     print(
     f"""============ BOOKBOT ============\n
-Analyzing book found at {arg}...\n
+Analyzing book found at {filepath}...\n
 ----------- Word Count ----------\n
 Found {num_words} total words\n
 --------- Character Count -------"""
 )
     for item in storted_chars:
         print(f"{item["char"]}: {item["num"]}")
-        
+
 if __name__ == "__main__":
     args = sys.argv
     if len(args) > 1:
